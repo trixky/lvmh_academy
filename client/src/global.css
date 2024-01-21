@@ -1,0 +1,52 @@
+* {
+    --main-block-padding: 16px;
+    --main-block-margin: var(--main-block-padding);
+    --main-half-padding: calc(var(--main-block-padding) / 2);
+    --main-half-margin: var(--main-half-padding);
+
+    --main-border-radius: 5px;
+
+    --main-text-extra-small: 0.6rem;
+    --main-text-small: 0.8rem;
+    --main-text-medium: 1rem;
+    --main-text-large: 1.6rem;
+    --main-text-extra-large: 2.4rem;
+}
+
+a:hover, a:hover > p, a:hover > h1, a:hover > h2 {
+    text-decoration: underline;
+}
+
+p {
+    font-size: var(--main-text-medium);
+}
+
+h1 {
+    font-size: var(--main-text-large);
+}
+
+h2 {
+    font-size: var(--main-text-medium);
+}
+
+input[type="checkbox"] {
+    accent-color: black;
+}
+
+button {
+    cursor: pointer;
+    margin: var(--main-block-margin);
+    padding: var(--main-block-padding);
+    background-color: black;
+    color: white;
+    border-radius: var(--main-border-radius);
+    font-size: var(--main-text-small);
+}
+
+.black-container {
+    margin: var(--main-block-margin);
+    padding: var(--main-block-padding);
+    background-color: black;
+    color: white;
+    border-radius: var(--main-border-radius);
+}
