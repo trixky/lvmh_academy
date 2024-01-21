@@ -1,7 +1,9 @@
 <!-- ------------------------------------ SCRIPT -->
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import { detect_device } from '$lib/logic/device';
+	import { onMount } from 'svelte';
 
 	const firstname = $page.url.searchParams.get('firstname');
 	const lastname = $page.url.searchParams.get('lastname');
@@ -11,7 +13,11 @@
 	const error: string | null =
 		!firstname || !lastname ? "Le transfert d'information a échoué, veuillez réessayer." : null;
 
-	const device: 'ios' | 'android' | 'other' = detect_device();
+	let device: 'ios' | 'android' | 'other' = 'other';
+
+	onMount(() => {
+		if (browser) device = detect_device();
+	});
 </script>
 
 <!-- ------------------------------------ CONTENT -->
@@ -172,13 +178,13 @@
 		text-align: start;
 	}
 
-    p.wallet-explain {
-        color: grey;
-        font-size: var(--main-text-small);
-        text-align: center;
-        padding: var(--main-block-padding);
-        margin: var(--main-block-margin);
-        padding-top: 0;
+	p.wallet-explain {
+		color: grey;
+		font-size: var(--main-text-small);
+		text-align: center;
+		padding: var(--main-block-padding);
+		margin: var(--main-block-margin);
+		padding-top: 0;
 		margin-top: 0;
-    }
+	}
 </style>
