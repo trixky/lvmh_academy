@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lvmh_academy/layout/layout.dart';
+import 'package:mobile/screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: GlobalLayout(),
+      home: const Screen(),
     );
   }
 }

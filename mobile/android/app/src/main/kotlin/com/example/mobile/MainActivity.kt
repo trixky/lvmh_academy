@@ -1,4 +1,4 @@
-package com.example.lvmh_academy
+package com.example.mobile
 
 import io.flutter.embedding.android.FlutterActivity
 
