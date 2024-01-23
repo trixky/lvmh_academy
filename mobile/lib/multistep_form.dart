@@ -39,6 +39,11 @@ class _MultiStateFormState extends State<MultiStepForm> {
               });
             }
           },
+          controlsBuilder: (context, details) {
+            return _currentStep == getSteps().length - 1
+                ? _buildLastStepControls(details)
+                : _buildDefaultControls(details);
+          },
           steps: getSteps()),
     );
   }
@@ -80,6 +85,19 @@ class _MultiStateFormState extends State<MultiStepForm> {
           keyboardType: TextInputType.emailAddress,
         ),
       ),
+      Step(
+        title: const Text('Confirmation'),
+        content: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Click on the confirm button to generate a QRCode',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18.0),
+            ),
+          ],
+        ),
+      ),
     ];
   }
 
@@ -88,5 +106,70 @@ class _MultiStateFormState extends State<MultiStepForm> {
     print('First Name: ${_firstNameController.text}');
     print('Last Name: ${_lastNameController.text}');
     print('Email: ${_emailController.text}');
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('QRCode Generated'),
+          content: const Column(
+            children: [
+              Text('QRCode will be displayed here'),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the dialog
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
+}
+
+Widget _buildDefaultControls(details) {
+  return Row(
+    children: [
+      ElevatedButton(
+        onPressed: details.onStepContinue,
+        child: Text('Next'),
+      ),
+      SizedBox(width: 16.0),
+      TextButton(
+        onPressed: details.onStepCancel,
+        child: Text('Back'),
+      ),
+    ],
+  );
+}
+
+Widget _buildLastStepControls(details) {
+  return Padding(
+    padding: const EdgeInsets.all(20.0),
+    child: Column(
+      children: [
+        Container(
+          alignment: Alignment.center,
+          child: ElevatedButton(
+            onPressed: details.onStepContinue,
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+            ),
+            child: Text('Confirm', style: TextStyle(fontSize: 16.0)),
+          ),
+        ),
+        Container(
+          alignment: Alignment.center,
+          child: TextButton(
+            onPressed: details.onStepCancel,
+            child: Text('Back'),
+          ),
+        ),
+      ],
+    ),
+  );
 }
