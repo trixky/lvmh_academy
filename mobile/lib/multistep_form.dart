@@ -116,6 +116,7 @@ class _MultiStateFormState extends State<MultiStepForm> {
           actions: [
             TextButton(
               onPressed: () {
+                Navigator.pop(context);
                 Navigator.pop(context); // Close the dialog
               },
               child: Text('OK'),
