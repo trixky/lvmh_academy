@@ -1,0 +1,23 @@
+{
+    "port": 3000,
+    "issuerId": "3388000000022315967",
+    "baseUrl": "https://walletobjects.googleapis.com/walletobjects/v1",
+    "classIdExtension": ".louisvuitton_project",
+    "passClass": {
+        "title": "Louis Vuitton PASS",
+        "subTitle": "Client",
+        "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Louis_Vuitton_LV_logo.png",
+        "backgroundColor": "#000000",
+        "heroImage": "https://t3.ftcdn.net/jpg/03/27/43/20/240_F_327432093_ogsNo9OyQYf4mXTqhRjckUldCpWfX8KB.jpg",
+        "subHeroImage": "https://fashioneliteluxury.files.wordpress.com/2014/10/louis-vuitton.jpg",
+        "demoValues": {
+            "name": "Georges Ferréol Vuitton",
+            "points": 13000,
+            "rank": "Platinum"
+        },
+        "join": {
+            "header": "Earn Rewards Connecting with Fashion at Louis Vuitton House",
+            "body": "Immerse yourself in the world of luxury fashion and earn points on your loyalty card by connecting with fellow fashion enthusiasts at the Louis Vuitton House."
+        }
+    }
+}
