@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "lvmh-project-411911",
+  "private_key_id": "3fa1b9e130a9b68dfc06ca28dc09866aa2904b6d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCl61/MO6+MURFe\nsu6Llc1Z7NLYNwjvwXTSy+7bch21f+5RQrdt2jL/r2gKfigNfCWMDL8/j+kgzIQg\neTgqGJnDBMRFbtbyYqrbmOAmCHR5DS9G6x5NngJg2lSkwP6oAdPu2XBjPp2LIDRm\nYGRtYMK6BUNDuX9jR75QgkrpCRV7/nub5O5eBx73AJolwT8lLwQ5y59jlIyG4Vhu\nNFDS910Aq26g+ldDD6RgK84z4Jv4eTI+rRdiZiSm950TTVr7BzqU0P/8jW9noUNL\nwCeZvb1ZLytaGFsiK1AuxfC5QADYK8YQ5CzUjhgug2fh0xLGyK+Dxh01ahe5X2er\nMVYNQ18LAgMBAAECggEAAgsG7/XgMIMjCp57b36Vu8C9y+nJk2I3dQ0L0Onz0bNU\nlO2UYqboL9vSFSb+iUP5FmNly3uTLFM4YUn81g/dfNhHLm+x9+QdJH0abX13KbJu\n3ZmxktUaRGUL28eAm0MCgBNvXdl8iSUJYCVZtzsUysOb026qUeelQUqJb5ssB43S\nlF7fBZSEFvoxJ0voEFvhYXFVi1c+bsA0iGBtaOTDQR9Cc2uJskyZHgsiYvttQ3mK\nJofe6Ks3whZ9gHrFGxeM7E6xJ1MpuvW2hbSWSMxeshtIStCRD2OP0XVGTh/z3pDh\nGl4OfLb8UbtuzSsFt6c0uJbL7B3H8u9ecmY4iRBtwQKBgQDaJB27OiK0CoSKOYP1\nCRps4Wt0MGhejNRzsMwHQTTRNtJurd/2/NNpujEPwj1x2Sb+keP4FKJtYvx1Q/sX\nVt6oW+MJrSk34adPDNwd7B+SizxglVkk7xEFbj5mSZ7czc3Lz1IAESj9BGD2ZUWK\nqYxYEsPVEz15ha01Npr7GqglKwKBgQDCtxR6X1wdrolYGFCGnYaOrXt0Q7xFc/q4\nx0EE8nVp4cstahDShtsGvL1iGD1B8gU8N7kfIfKHlb8DVrCcggHdcxqLZnLKrSvs\nLq16fN/+Pe9+SWQ1QxV3yqa0LtV8EHldJt+fq8U22kXNm7JdtYcWebocESNl03nt\nX8GEuxp9oQKBgCq4tgXr7c363VhAyWIc5Ur7ntLDhD04MYdy0ZJ+J7ztkqrQbLNv\ncmwbZe5jKSt5ztQ+eDomuGTZ5P2GUc+RWMv6Ku3DNvZVwDGQIC/QBaLql+mGdk3w\ncBHzNE9ODcnKmIpY0QNoWPGsgNzgmoz8hZreGfJJ8VkyX+izCAkzgEi/AoGANnpC\noHpNq4BJrPwgi4lHPGQNRlotMsFgRJJ6/odXkmg6EFq8mipg3WGxGuDtQqYUEOUG\nRk+ZK5YZ+zUl9KPrIaoyow3m0A3jXBEzODH3+Yoal5qxDrXWK83nFkKEOFHjosxd\nhK7qXo5zOTN2lAFV6lPkXjXtUW/5jRBddGVk5AECgYB+HD1hMpILyUelGDuhNkDY\nYzHBmc7NxB74LK6fPSrtG87NJ0H995LIv666pUfs7qji1wCNlKv2/houTFe6o8Sx\nu6VQ2hhq35AGQdXZTtJ+wqNN+kLl71P651jiTIqLYvmJAMxQb+v+QCtmMpK9cR5P\nrN0sarmvAgGvT5T0dAYeEA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "lvmh-service-id@lvmh-project-411911.iam.gserviceaccount.com",
+  "client_id": "108346490522899442957",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/lvmh-service-id%40lvmh-project-411911.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

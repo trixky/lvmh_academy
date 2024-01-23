@@ -33,5 +33,6 @@
         align-items: center;
         justify-content: start;
         padding: var(--main-block-padding);
+        max-width: 400px;
     }
 </style>
