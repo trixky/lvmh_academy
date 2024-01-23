@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/multistep_form.dart';
 // import 'package:mobile/location_search_bar.dart';
 
 class Screen extends StatelessWidget {
@@ -45,7 +46,9 @@ class Screen extends StatelessWidget {
               width: 20,
             ),
             FloatingActionButton(
-              onPressed: () async {},
+              onPressed: () async {
+                _navigateToMultiStepForm(context);
+              },
               heroTag: null,
               child: const Icon(Icons.add),
             ),
@@ -53,4 +56,11 @@ class Screen extends StatelessWidget {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       );
+}
+
+void _navigateToMultiStepForm(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const MultiStepForm()),
+  );
 }
