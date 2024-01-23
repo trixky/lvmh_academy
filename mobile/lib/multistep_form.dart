@@ -60,7 +60,7 @@ class _MultiStateFormState extends State<MultiStepForm> {
               height: 20,
             ),
             TextFormField(
-              controller: _firstNameController,
+              controller: _lastNameController,
               decoration: const InputDecoration(
                 labelText: 'Last Name',
                 border: OutlineInputBorder(),
