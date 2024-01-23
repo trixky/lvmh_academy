@@ -1,4 +1,4 @@
-# lvmh_academy
+# mobile
 
 A new Flutter project.
 
