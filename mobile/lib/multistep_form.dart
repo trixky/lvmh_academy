@@ -91,9 +91,9 @@ class _MultiStateFormState extends State<MultiStepForm> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Click on the confirm button to generate a QRCode',
+              'Create an account and generate a QR Code ',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18.0),
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -111,12 +111,8 @@ class _MultiStateFormState extends State<MultiStepForm> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('QRCode Generated'),
-          content: const Column(
-            children: [
-              Text('QRCode will be displayed here'),
-            ],
-          ),
+          title: const Text('Client QR Code'),
+          content: Text('QRCode will be displayed here'),
           actions: [
             TextButton(
               onPressed: () {
