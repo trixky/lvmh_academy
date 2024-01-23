@@ -20,17 +20,16 @@ class _MultiStateFormState extends State<MultiStepForm> {
         title: const Text('New Client Registration'),
       ),
       body: Stepper(
-          // type: StepperType.vertical,
+          type: StepperType.vertical,
           currentStep: _currentStep,
           onStepContinue: () {
-            // Handle 'Next' button press
-            if (_currentStep < 2) {
+            final isLastStep = _currentStep == getSteps().length - 1;
+            if (isLastStep) {
+              _submitForm();
+            } else {
               setState(() {
                 _currentStep++;
               });
-            } else {
-              // Handle submission, for example, by calling a function
-              _submitForm();
             }
           },
           onStepCancel: () {
@@ -89,16 +88,5 @@ class _MultiStateFormState extends State<MultiStepForm> {
     print('First Name: ${_firstNameController.text}');
     print('Last Name: ${_lastNameController.text}');
     print('Email: ${_emailController.text}');
-    // Reset the form
-    _resetForm();
-  }
-
-  void _resetForm() {
-    setState(() {
-      // _currentStep = 0;
-      _firstNameController.clear();
-      _lastNameController.clear();
-      _emailController.clear();
-    });
   }
 }
