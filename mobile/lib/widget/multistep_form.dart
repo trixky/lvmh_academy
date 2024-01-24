@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/models/client.dart';
+import 'package:mobile/widget/qr_code_generator.dart';
+import 'package:uuid/uuid.dart';
+
+final buttonStyle = ButtonStyle(
+  backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+  foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+);
 
 class MultiStepForm extends StatefulWidget {
-  const MultiStepForm({super.key});
+  const MultiStepForm(
+      {super.key, required this.addClient, required this.focusClient});
+
+  final void Function(LVMHclient client) addClient;
+  final void Function(LVMHclient client) focusClient;
 
   @override
   State<MultiStepForm> createState() => _MultiStateFormState();
@@ -12,6 +24,8 @@ class _MultiStateFormState extends State<MultiStepForm> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+
+  final uuidGenerator = Uuid();
 
   @override
   Widget build(BuildContext context) {
@@ -51,14 +65,17 @@ class _MultiStateFormState extends State<MultiStepForm> {
   List<Step> getSteps() {
     return <Step>[
       Step(
-        title: const Text('Name'),
+        title: const Text('Nom'),
         content: Column(
           children: [
             TextFormField(
               controller: _firstNameController,
               decoration: const InputDecoration(
-                labelText: 'First Name',
+                labelText: 'Prénom',
                 border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black, width: 2.0),
+                ),
               ),
             ),
             const SizedBox(
@@ -67,8 +84,11 @@ class _MultiStateFormState extends State<MultiStepForm> {
             TextFormField(
               controller: _lastNameController,
               decoration: const InputDecoration(
-                labelText: 'Last Name',
+                labelText: 'Nom',
                 border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black, width: 2.0),
+                ),
               ),
             ),
           ],
@@ -81,17 +101,20 @@ class _MultiStateFormState extends State<MultiStepForm> {
           decoration: const InputDecoration(
             labelText: 'Email',
             border: OutlineInputBorder(),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black, width: 2.0),
+            ),
           ),
           keyboardType: TextInputType.emailAddress,
         ),
       ),
-      Step(
-        title: const Text('Confirmation'),
+      const Step(
+        title: Text('Confirmation'),
         content: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Create an account and generate a QR Code ',
+              'Créer un compte et générer un QR code',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
@@ -101,25 +124,57 @@ class _MultiStateFormState extends State<MultiStepForm> {
     ];
   }
 
+  String _generateURL(String firstname, lastname, email, phone) {
+    const baseUrl = "https://lvmh.trixky.com:5173";
+    String url = "$baseUrl?firstname=$firstname&lastname=$lastname";
+
+    if (email != null && email.isNotEmpty) {
+      url += "&email=$email";
+    }
+    if (phone != null && phone.isNotEmpty) {
+      url += "&phone=$phone";
+    }
+
+    return url;
+  }
+
   void _submitForm() {
-    // Handle registration logic here
-    print('First Name: ${_firstNameController.text}');
-    print('Last Name: ${_lastNameController.text}');
-    print('Email: ${_emailController.text}');
+    const defaultValue = "Default";
+
+    final newClient = LVMHclient(
+      id: uuidGenerator.v4(),
+      firstname: _firstNameController.text.isNotEmpty
+          ? _firstNameController.text
+          : defaultValue,
+      lastname: _lastNameController.text.isNotEmpty
+          ? _lastNameController.text
+          : defaultValue,
+      email: _emailController.text,
+    );
+
+    widget.addClient(newClient);
+    widget.focusClient(newClient);
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Client QR Code'),
-          content: Text('QRCode will be displayed here'),
+          title: const Text('Client enregistré'),
+          content: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: SizedBox(
+              height: 200,
+              child: QRcodeGenerator(url: newClient.passUrl),
+            ),
+          ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
                 Navigator.pop(context); // Close the dialog
               },
-              child: Text('OK'),
+              child:
+                  const Text('Fermer', style: TextStyle(color: Colors.black)),
             ),
           ],
         );
@@ -129,24 +184,29 @@ class _MultiStateFormState extends State<MultiStepForm> {
 }
 
 Widget _buildDefaultControls(details) {
-  return Row(
-    children: [
-      ElevatedButton(
-        onPressed: details.onStepContinue,
-        child: Text('Next'),
-      ),
-      SizedBox(width: 16.0),
-      TextButton(
-        onPressed: details.onStepCancel,
-        child: Text('Back'),
-      ),
-    ],
+  return Padding(
+    padding: const EdgeInsets.only(top: 8),
+    child: Row(
+      children: [
+        ElevatedButton(
+          onPressed: details.onStepContinue,
+          style: buttonStyle,
+          child: const Text('Suivant'),
+        ),
+        const SizedBox(width: 16.0),
+        TextButton(
+          onPressed: details.onStepCancel,
+          style: buttonStyle,
+          child: const Text('Retour'),
+        ),
+      ],
+    ),
   );
 }
 
 Widget _buildLastStepControls(details) {
   return Padding(
-    padding: const EdgeInsets.all(20.0),
+    padding: const EdgeInsets.only(top: 20.0),
     child: Column(
       children: [
         Container(
@@ -154,16 +214,22 @@ Widget _buildLastStepControls(details) {
           child: ElevatedButton(
             onPressed: details.onStepContinue,
             style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+              backgroundColor: Colors.black,
+              foregroundColor: Colors.white,
             ),
-            child: Text('Confirm', style: TextStyle(fontSize: 16.0)),
+            child: const Text('Confirmer', style: TextStyle(fontSize: 16.0)),
           ),
         ),
         Container(
           alignment: Alignment.center,
           child: TextButton(
             onPressed: details.onStepCancel,
-            child: Text('Back'),
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+            ),
+            child: const Text('Retour'),
           ),
         ),
       ],

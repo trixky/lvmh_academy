@@ -7,11 +7,10 @@ class BlackBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    margin: const EdgeInsets.all(16),
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
       color: Colors.black,
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(14),
     ),
     child: child,
   );
