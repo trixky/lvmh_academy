@@ -1,4 +1,5 @@
 import 'package:mobile/config.dart';
+import 'package:mobile/models/stats.dart';
 
 class LVMHclient {
   const LVMHclient({
@@ -7,6 +8,7 @@ class LVMHclient {
     required this.lastname,
     this.email,
     this.phone,
+    this.stats,
   });
 
   final String id;
@@ -14,6 +16,7 @@ class LVMHclient {
   final String lastname;
   final String? email;
   final String? phone;
+  final LVMHclientStats? stats;
 
   String get passUrl {
     String url =
