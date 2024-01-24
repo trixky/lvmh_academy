@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 
-class QRcodeScanner extends StatelessWidget {
-  const QRcodeScanner({super.key});
+class QRcodeGenerator extends StatelessWidget {
+  const QRcodeGenerator({super.key, required this.url});
+
+  final String url;
 
   @override
   Widget build(BuildContext context) {
     return SfBarcodeGenerator(
-      value: 'www.syncfusion.com',
+      value: url,
       symbology: QRCode(),
       showValue: false,
     );

@@ -38,6 +38,7 @@ dependencies:
   syncfusion_flutter_barcodes: ^24.1.47
   camera: ^0.10.5+9
   barcode_scan2: any
+  uuid: ^4.3.3
 
 dev_dependencies:
   flutter_test:
