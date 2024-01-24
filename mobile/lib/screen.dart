@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/data/clients.dart';
@@ -74,11 +76,11 @@ class _ScreenState extends State<Screen> {
             onPressed: () async {
               var result = await BarcodeScanner.scan();
 
-              print(
-                  result.type); // The result type (barcode, cancelled, failed)
-              print(result.rawContent); // The barcode content
-              print(result.format); // The barcode format (as enum)
-              print(result
+              log(
+                  result.type.toString()); // The result type (barcode, cancelled, failed)
+              log(result.rawContent); // The barcode content
+              log(result.format.toString()); // The barcode format (as enum)
+              log(result
                   .formatNote); // If a unknown format was scanned this field contains a note
             },
             heroTag: null,
