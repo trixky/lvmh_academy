@@ -54,7 +54,7 @@ class _ClientSearchBarState extends State<ClientSearchBar> {
           return TextFormField(
             decoration: InputDecoration(
               border: const UnderlineInputBorder(),
-              labelText: 'Search client',
+              labelText: 'Chercher un client',
               labelStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
             ),
             cursorColor: Colors.white,
