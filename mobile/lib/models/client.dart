@@ -1,3 +1,5 @@
+import 'package:mobile/config.dart';
+
 class LVMHclient {
   const LVMHclient({
     required this.id,
@@ -7,9 +9,23 @@ class LVMHclient {
     this.phone,
   });
 
-  final int id;
+  final String id;
   final String firstname;
   final String lastname;
   final String? email;
   final String? phone;
+
+  String get passUrl {
+    String url =
+        "${LVMHconfig.API_BASE_URL}?firstname=$firstname&lastname=$lastname";
+
+    if (email != null && email!.isNotEmpty) {
+      url += "&email=$email";
+    }
+    if (phone != null && phone!.isNotEmpty) {
+      url += "&phone=$phone";
+    }
+
+    return url;
+  }
 }
