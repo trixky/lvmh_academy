@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +6,6 @@ import 'package:mobile/widget/client_header.dart';
 import 'package:mobile/widget/search_bar.dart';
 import 'package:mobile/models/client.dart';
 import 'package:mobile/widget/multistep_form.dart';
-import 'package:mrz_scanner/mrz_scanner.dart';
-// import 'package:mobile/location_search_bar.dart';
 
 class Screen extends StatefulWidget {
   Screen({super.key});
@@ -57,16 +54,11 @@ class _ScreenState extends State<Screen> {
 
   @override
   Widget build(BuildContext context) {
-    Widget body =  SafeArea(
+    Widget body = const SafeArea(
       child: Center(
-        child: MRZScanner(
-        onSuccess: (mrzResult) {
-          log(mrzResult.givenNames);
-        },
-      ),
-        // child: Text(
-          // 'Aucun client sélectionné',
-        // ),
+        child: Text(
+          'Aucun client sélectionné',
+        ),
       ),
     );
 
@@ -99,15 +91,10 @@ class _ScreenState extends State<Screen> {
           children: [
             FloatingActionButton(
               onPressed: () async {
-                var result = await BarcodeScanner.scan();
+                // ---------------------------------------- // BULLSHIT
+                final result = await BarcodeScanner.scan(); // BULLSHIT
+                // ---------------------------------------- // BULLSHIT
                 _focusClientRandom();
-
-                // log(result.type
-                //     .toString()); // The result type (barcode, cancelled, failed)
-                // log(result.rawContent); // The barcode content
-                // log(result.format.toString()); // The barcode format (as enum)
-                // log(result
-                //     .formatNote); // If a unknown format was scanned this field contains a note
               },
               heroTag: null,
               backgroundColor: Colors.black,
