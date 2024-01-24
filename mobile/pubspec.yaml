@@ -40,6 +40,12 @@ dependencies:
   barcode_scan2: any
   uuid: ^4.3.3
 
+  flutter_native_splash: ^2.3.9
+
+flutter_native_splash:
+  background_image: assets/splash_screen.png
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
