@@ -1,4 +1,5 @@
 import 'package:mobile/models/client.dart';
+import 'package:mobile/models/stats.dart';
 
 Future<List<LVMHclient>> searchClient(List<LVMHclient> clientList, String search, {int limit = 1}) async {
   final List<LVMHclient> findedClients = [];
@@ -17,13 +18,22 @@ Future<List<LVMHclient>> searchClient(List<LVMHclient> clientList, String search
   return findedClients;
 }
 
-List<LVMHclient> defaultClients = const [
+List<LVMHclient> defaultClients = [
   LVMHclient(
     id: "default.1",
     firstname: 'Bernard',
     lastname: 'Arnaud',
     email: 'bernard.arnaud@lvmh.com',
     phone: '0606060606',
+    stats: LVMHclientStats(
+      purchases: [
+        123.45,
+        5042.30,
+        1815.0,
+        13517.0,
+        837.7,
+      ],
+    ),
   ),
   LVMHclient(
     id: "default.2",

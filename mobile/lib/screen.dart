@@ -1,8 +1,8 @@
-
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/data/clients.dart';
 import 'package:mobile/widget/client_header.dart';
+import 'package:mobile/widget/client_stats.dart';
 import 'package:mobile/widget/search_bar.dart';
 import 'package:mobile/models/client.dart';
 import 'package:mobile/widget/multistep_form.dart';
@@ -63,9 +63,17 @@ class _ScreenState extends State<Screen> {
     );
 
     if (focusedClient != null) {
-      body = ClientHeader(
-        client: focusedClient!,
-        unFocusClient: _unfocusClient,
+      body = SingleChildScrollView(
+        child: Column(
+          children: [
+            ClientHeader(
+              client: focusedClient!,
+              unFocusClient: _unfocusClient,
+            ),
+            const SizedBox(height: 10),
+            ClientStats(client: focusedClient!),
+          ],
+        ),
       );
     }
 
