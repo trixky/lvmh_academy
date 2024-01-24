@@ -114,7 +114,7 @@ class _MultiStateFormState extends State<MultiStepForm> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Créer un compte et générer un QR code',
+              'Créer le compte',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),

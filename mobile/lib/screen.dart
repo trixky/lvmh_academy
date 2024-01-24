@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/data/clients.dart';
 import 'package:mobile/widget/client_header.dart';
-import 'package:mobile/widget/qr_code_generator.dart';
 import 'package:mobile/widget/search_bar.dart';
 import 'package:mobile/models/client.dart';
 import 'package:mobile/widget/multistep_form.dart';
@@ -31,6 +28,12 @@ class _ScreenState extends State<Screen> {
   void _focusClient(LVMHclient client) {
     setState(() {
       focusedClient = client;
+    });
+  }
+
+  void _focusClientRandom() {
+    setState(() {
+      focusedClient = clients[clients.length - 1];
     });
   }
 
@@ -89,13 +92,14 @@ class _ScreenState extends State<Screen> {
             FloatingActionButton(
               onPressed: () async {
                 var result = await BarcodeScanner.scan();
+                _focusClientRandom();
 
-                log(result.type
-                    .toString()); // The result type (barcode, cancelled, failed)
-                log(result.rawContent); // The barcode content
-                log(result.format.toString()); // The barcode format (as enum)
-                log(result
-                    .formatNote); // If a unknown format was scanned this field contains a note
+                // log(result.type
+                //     .toString()); // The result type (barcode, cancelled, failed)
+                // log(result.rawContent); // The barcode content
+                // log(result.format.toString()); // The barcode format (as enum)
+                // log(result
+                //     .formatNote); // If a unknown format was scanned this field contains a note
               },
               heroTag: null,
               backgroundColor: Colors.black,
