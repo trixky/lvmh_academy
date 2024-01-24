@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/multistep_form.dart';
+import 'package:mobile/widget/multistep_form.dart';
 import 'package:mobile/screen.dart';
 
 void main() {
