@@ -1,6 +1,8 @@
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/data/clients.dart';
 import 'package:mobile/widget/client_header.dart';
+import 'package:mobile/widget/qr_code_generator.dart';
 import 'package:mobile/widget/search_bar.dart';
 import 'package:mobile/models/client.dart';
 import 'package:mobile/multistep_form.dart';
@@ -39,11 +41,11 @@ class _ScreenState extends State<Screen> {
   @override
   Widget build(BuildContext context) {
     Widget body = const SafeArea(
-      child: Center(
-        child: Text(
-          'Aucun client sélectionné',
-        ),
-      ),
+      child: Center(child: QRcodeScanner()
+          // child: Text(
+          //   'Aucun client sélectionné',
+          // ),
+          ),
     );
 
     if (focusedClient != null) {
@@ -69,7 +71,16 @@ class _ScreenState extends State<Screen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FloatingActionButton(
-            onPressed: () async {},
+            onPressed: () async {
+              var result = await BarcodeScanner.scan();
+
+              print(
+                  result.type); // The result type (barcode, cancelled, failed)
+              print(result.rawContent); // The barcode content
+              print(result.format); // The barcode format (as enum)
+              print(result
+                  .formatNote); // If a unknown format was scanned this field contains a note
+            },
             heroTag: null,
             child: const Icon(Icons.credit_card),
           ),
