@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/data/clients.dart';
@@ -5,6 +7,7 @@ import 'package:mobile/widget/client_header.dart';
 import 'package:mobile/widget/search_bar.dart';
 import 'package:mobile/models/client.dart';
 import 'package:mobile/widget/multistep_form.dart';
+import 'package:mrz_scanner/mrz_scanner.dart';
 // import 'package:mobile/location_search_bar.dart';
 
 class Screen extends StatefulWidget {
@@ -54,11 +57,16 @@ class _ScreenState extends State<Screen> {
 
   @override
   Widget build(BuildContext context) {
-    Widget body = const SafeArea(
+    Widget body =  SafeArea(
       child: Center(
-        child: Text(
-          'Aucun client sélectionné',
-        ),
+        child: MRZScanner(
+        onSuccess: (mrzResult) {
+          log(mrzResult.givenNames);
+        },
+      ),
+        // child: Text(
+          // 'Aucun client sélectionné',
+        // ),
       ),
     );
 

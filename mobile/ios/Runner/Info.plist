@@ -6,6 +6,10 @@
     <key>NSCameraUsageDescription</key>
     <string>Camera permission is required for barcode scanning.</string>
     <!-- QRcode scanner -->
+	<!-- ID/Passport scanner -->
+	<key>NSCameraUsageDescription</key>
+    <string>Allow Camera to scan MRZ</string>
+	<!-- ID/Passport scanner -->
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
