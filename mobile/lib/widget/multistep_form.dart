@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/logic/names.dart';
 import 'package:mobile/models/client.dart';
 import 'package:mobile/widget/qr_code_generator.dart';
+import 'package:mrz_scanner/mrz_scanner.dart';
 import 'package:uuid/uuid.dart';
 
 final buttonStyle = ButtonStyle(
@@ -27,38 +29,67 @@ class _MultiStateFormState extends State<MultiStepForm> {
 
   final uuidGenerator = Uuid();
 
+  // void _handle
+
   @override
   Widget build(BuildContext context) {
+    Widget body = _currentStep >= 0
+        ? Stepper(
+            type: StepperType.vertical,
+            currentStep: _currentStep,
+            onStepContinue: () {
+              final isLastStep = _currentStep == getSteps().length - 1;
+              if (isLastStep) {
+                _submitForm();
+              } else {
+                setState(() {
+                  _currentStep++;
+                });
+              }
+            },
+            onStepCancel: () {
+              if (_currentStep > 0) {
+                setState(() {
+                  _currentStep--;
+                });
+              }
+            },
+            controlsBuilder: (context, details) {
+              return _currentStep == getSteps().length - 1
+                  ? _buildLastStepControls(details)
+                  : _buildDefaultControls(details);
+            },
+            steps: getSteps(),
+          )
+        : MRZScanner(
+            onSuccess: (mrzResult) {
+              setState(() {
+                _firstNameController.text = namesFormatter(mrzResult.givenNames);
+                _lastNameController.text = namesFormatter(mrzResult.surnames);
+                _currentStep = 0;
+              });
+            },
+          );
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('New Client Registration'),
+        title: const Text('Nouveau Client'),
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
+        actions: [
+          IconButton(
+            icon: Icon(_currentStep >= 0
+                ? Icons.document_scanner_outlined
+                : Icons.edit_document),
+            onPressed: () {
+              setState(() {
+                _currentStep = _currentStep >= 0 ? -1 : _currentStep = 0;
+              });
+            },
+          ),
+        ],
       ),
-      body: Stepper(
-          type: StepperType.vertical,
-          currentStep: _currentStep,
-          onStepContinue: () {
-            final isLastStep = _currentStep == getSteps().length - 1;
-            if (isLastStep) {
-              _submitForm();
-            } else {
-              setState(() {
-                _currentStep++;
-              });
-            }
-          },
-          onStepCancel: () {
-            if (_currentStep > 0) {
-              setState(() {
-                _currentStep--;
-              });
-            }
-          },
-          controlsBuilder: (context, details) {
-            return _currentStep == getSteps().length - 1
-                ? _buildLastStepControls(details)
-                : _buildDefaultControls(details);
-          },
-          steps: getSteps()),
+      body: body,
     );
   }
 
@@ -122,20 +153,6 @@ class _MultiStateFormState extends State<MultiStepForm> {
         ),
       ),
     ];
-  }
-
-  String _generateURL(String firstname, lastname, email, phone) {
-    const baseUrl = "https://lvmh.trixky.com:5173";
-    String url = "$baseUrl?firstname=$firstname&lastname=$lastname";
-
-    if (email != null && email.isNotEmpty) {
-      url += "&email=$email";
-    }
-    if (phone != null && phone.isNotEmpty) {
-      url += "&phone=$phone";
-    }
-
-    return url;
   }
 
   void _submitForm() {

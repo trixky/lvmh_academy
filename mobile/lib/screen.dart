@@ -1,3 +1,4 @@
+
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/data/clients.dart';
@@ -5,7 +6,6 @@ import 'package:mobile/widget/client_header.dart';
 import 'package:mobile/widget/search_bar.dart';
 import 'package:mobile/models/client.dart';
 import 'package:mobile/widget/multistep_form.dart';
-// import 'package:mobile/location_search_bar.dart';
 
 class Screen extends StatefulWidget {
   Screen({super.key});
@@ -91,15 +91,10 @@ class _ScreenState extends State<Screen> {
           children: [
             FloatingActionButton(
               onPressed: () async {
-                var result = await BarcodeScanner.scan();
+                // ---------------------------------------- // BULLSHIT
+                final result = await BarcodeScanner.scan(); // BULLSHIT
+                // ---------------------------------------- // BULLSHIT
                 _focusClientRandom();
-
-                // log(result.type
-                //     .toString()); // The result type (barcode, cancelled, failed)
-                // log(result.rawContent); // The barcode content
-                // log(result.format.toString()); // The barcode format (as enum)
-                // log(result
-                //     .formatNote); // If a unknown format was scanned this field contains a note
               },
               heroTag: null,
               backgroundColor: Colors.black,
