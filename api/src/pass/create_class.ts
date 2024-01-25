@@ -105,8 +105,8 @@ export default async function createPassClass(req: any, res: any, httpClient: an
         }
     };
 
-    console.log("ouiiiiiiiiiiiiii la generic lcass")
-    console.log(genericClass)
+    // console.log("ouiiiiiiiiiiiiii la generic lcass")
+    // console.log(genericClass)
 
     let response;
     try {

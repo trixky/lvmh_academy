@@ -15,7 +15,8 @@ const app = express();
 
 // ======================== middleware ========================
 // ---------- parse application/json
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 // ---------- serve static files
 app.use(express.static('public'));
 // ---------- allow cross origin
@@ -28,14 +29,14 @@ app.use((_, res, next) => {
 const ROUTE_create_pass_class = '/create-pass-class';
 app.post(ROUTE_create_pass_class, async (req, res) => {
     console.log("------ REQUEST: " + ROUTE_create_pass_class)
-await createPassClass(req, res, httpClient);
+    await createPassClass(req, res, httpClient);
 });
 
 const ROUTE_create_pass_object = '/create-pass';
 app.post(ROUTE_create_pass_object, async (req, res) => {
     console.log("------ REQUEST: " + ROUTE_create_pass_object)
-await createPassClass(req, res, httpClient);
-await createPassObject(req, res);
+    // await createPassClass(req, res, httpClient);
+    await createPassObject(req, res);
 });
 
 // ======================== start server ========================
