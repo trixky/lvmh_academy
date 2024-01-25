@@ -5,10 +5,15 @@
 	import { detect_device } from '$lib/logic/device';
 	import { onMount } from 'svelte';
 
-	let firstname = $page.url.searchParams.get('firstname');
-	let lastname = $page.url.searchParams.get('lastname');
-	let email = $page.url.searchParams.get('email');
-	let phone = $page.url.searchParams.get('phone');
+	let firstname: string | null | undefined = $page.url.searchParams.get('firstname');
+	let lastname: string | null | undefined = $page.url.searchParams.get('lastname');
+	let email: string | null | undefined = $page.url.searchParams.get('email');
+	let phone: string | null | undefined = $page.url.searchParams.get('phone');
+
+	firstname = firstname?.replaceAll(".", " ");
+	lastname = lastname?.replaceAll(".", " ");
+	email = email?.replaceAll(".", " ");
+	phone = phone?.replaceAll(".", " ");
 
 	const error_transfer: string | null =
 		!firstname || !lastname ? "Le transfert d'information a échoué, veuillez réessayer." : null;
@@ -26,9 +31,21 @@
 
 	let error_checkbox: string | null = null;
 
-	function handle_submit() {
+	async function handle_submit() {
 		if (check_full) {
 			error_checkbox = null;
+			let url = 'http://lvmh.trixky.com:3000/create-pass?dev=true';
+			// let url = 'http://localhost:3000/create-pass?dev=true';
+			if (firstname != null && firstname.length > 0) url += '&firstname=' + btoa(firstname);
+			if (lastname != null && lastname.length > 0) url += '&lastname=' + btoa(lastname);
+			if (email != null && email.length > 0) url += '&email=' + btoa(email);
+
+			const res = await fetch(url, {
+				method: 'POST'
+			});
+			const item = await res.json();
+
+			window.location.href = item.url;
 		} else {
 			error_checkbox =
 				"Veuillez confirmer vos informations et accepter les conditions générales d'utilisation.";
@@ -114,8 +131,8 @@
 			{#if error_checkbox}
 				<p class="error">{error_checkbox}</p>
 			{/if}
-			<button class="button" on:click={handle_submit} disabled={error_transfer != null}>
-				<img src="/card.svg" width="50px" alt="">
+			<button class="get" on:click={handle_submit} disabled={error_transfer != null}>
+				<img class="card" src="/card.svg" width="50px" alt="" />
 				<p>Obtenir ma carte</p>
 			</button>
 			{#if device != 'other'}
@@ -199,7 +216,6 @@
 	}
 
 	.check-confirmation-container.blocked {
-
 		pointer-events: none;
 		opacity: 0.3;
 	}
@@ -260,6 +276,20 @@
 	}
 
 	button {
-		width: fit-content
+		width: fit-content;
+	}
+
+	button.get {
+		display: flex;
+		direction: row;
+		align-items: center;
+		padding: 10px 13px 10px 13px;
+	}
+
+	img.card {
+		-webkit-filter: invert(1);
+		filter: invert(1);
+		width: 28px;
+		margin-right: 10px;
 	}
 </style>
