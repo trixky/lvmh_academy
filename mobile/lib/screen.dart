@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/data/clients.dart';
@@ -8,7 +10,7 @@ import 'package:mobile/models/client.dart';
 import 'package:mobile/widget/multistep_form.dart';
 
 class Screen extends StatefulWidget {
-  Screen({super.key});
+  const Screen({super.key});
 
   @override
   State<Screen> createState() => _ScreenState();
@@ -79,13 +81,31 @@ class _ScreenState extends State<Screen> {
 
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
+        leadingWidth: 50,
+        leading: IconButton(
+          icon: const Icon(Icons.search),
+          onPressed: () {
+            log("ouissff");
+            if (searchFocusNode.hasFocus) {
+              searchFocusNode.unfocus();
+            } else {
+              searchFocusNode.requestFocus();
+              // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+              searchFocusNode.notifyListeners();
+            }
+          },
+        ),
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
-        title: ClientSearchBar(
-          clients: clients,
-          focusClient: _focusClient,
-          unFocusClient: _unfocusClient,
-          searchFocusNode: searchFocusNode,
+        title: Padding(
+          padding: const EdgeInsets.only(right: 50),
+          child: ClientSearchBar(
+            clients: clients,
+            focusClient: _focusClient,
+            unFocusClient: _unfocusClient,
+            searchFocusNode: searchFocusNode,
+          ),
         ),
       ),
       body: Container(

@@ -12,6 +12,7 @@ sudo apt-get upgrade -y
 sudo apt-get install tmux -y
 sudo apt-get install git -y
 sudo apt-get install snap -y
+sudo apt install node-typescript -y
 sudo snap install node --classic
 ssh-keygen -t rsa -b 4096
 ```
