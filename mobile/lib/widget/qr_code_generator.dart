@@ -8,8 +8,10 @@ class QRcodeGenerator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String sanitizedUrl = url.replaceAll(" ", ".");
+
     return SfBarcodeGenerator(
-      value: url,
+      value: sanitizedUrl,
       symbology: QRCode(),
       showValue: false,
     );
