@@ -5,7 +5,15 @@ import jwt from 'jsonwebtoken';
 const classId = `${config.issuerId}${config.classIdExtension}`;
 
 export default async function createPassObject(req: any, res: any) {
-    let objectSuffix = `${req.body.email.replace(/[^\w.-]/g, '_')}`;
+    console.log("bonnn")
+    console.log(req.query.firstname)
+    console.log(req.query.lastname)
+    console.log(req.query.email)
+    const defaultEmail = "badidou.freeride@gmail.com"
+
+    let email = req.query.email != null && req.query.email != undefined ? atob(req.query.email) : defaultEmail
+
+    let objectSuffix = `${email.replace(/[^\w.-]/g, '_')}`;
     let objectId = `${config.issuerId}.${objectSuffix}`;
 
     let genericObject = {
@@ -73,5 +81,6 @@ export default async function createPassObject(req: any, res: any) {
     const token = jwt.sign(claims, credentials.private_key, { algorithm: 'RS256' });
     const saveUrl = `https://pay.google.com/gp/v/save/${token}`;
 
-    res.send(`<a href='${saveUrl}'><img src='wallet-button.png'></a>`);
+    // res.send(`<a href='${saveUrl}'><img src='wallet-button.png'></a>`);
+    res.send(JSON.stringify({ url: saveUrl }));
 }
