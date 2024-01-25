@@ -51,22 +51,22 @@ class _ClientSearchBarState extends State<ClientSearchBar> {
             }
           });
 
-          return TextFormField(
-            decoration: InputDecoration(
-              border: const UnderlineInputBorder(),
-              labelText: 'Chercher un client',
-              labelStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-            ),
-            cursorColor: Colors.white,
+          return TextField(
+            focusNode: focusNode,
+            onSubmitted: (String value) => onFieldSubmitted(),
+            controller: textEditingController,
             style: const TextStyle(
               color: Colors.white,
-              decorationColor: Colors.white,
             ),
-            controller: textEditingController,
-            focusNode: focusNode,
-            onFieldSubmitted: (String value) {
-              onFieldSubmitted();
-            },
+            cursorColor: Colors.white,
+            selectionControls: MaterialTextSelectionControls(),
+            decoration: const InputDecoration(
+              hintText: 'Chercher un client',
+              hintStyle: TextStyle(color: Colors.white54),
+              border: InputBorder.none,
+              focusColor: Colors.white,
+              hoverColor: Colors.white,
+            ),
           );
         },
         optionsBuilder: (TextEditingValue textEditingValue) async {
