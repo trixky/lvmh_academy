@@ -1,31 +1,41 @@
-# Google Wallet Codelab
+# LVMH Academy
 
-This project contains sample code used for the [Google Wallet Codelab](https://codelabs.developers.google.com/save-to-wallet-web).
+Implementation of an in-store customer identification application aimed at streamlining the customer experience using the phone's native Wallet system, QRcode and Passport scanner.
 
-# OVH instance script
+<img src="https://github.com/trixky/lvmh_academy/blob/main/.demo/screenshots.gif" alt="Demo gif" width="200"/>
 
-## Configuration
+> This project was carried out as part of an inter-school bootcamp (HEC x 42 x Strate) at HEC Paris campus in partnership with LVMH with the aim of creating a potential startup aimed at improving the customer experience in stores. (January 2024)
 
-```bash
-sudo apt-get update -y
-sudo apt-get upgrade -y
-sudo apt-get install tmux -y
-sudo apt-get install git -y
-sudo apt-get install snap -y
-sudo apt install node-typescript -y
-sudo snap install node --classic
-ssh-keygen -t rsa -b 4096
-```
+## Features
 
-## Check instance accessibility from web
+- Scan the customer's passport to extract his information.
+- Create a customer account.
+- Generate a QRcode for add the customer's card to his Wallet.
+- Scan the QRcode to identify the customer from his Wallet.
+- Access customer information by seller after identification.
 
-```bash
-ip -c a # get the ip of the instance
-python3 -m http.server 8080 --bind $ip_of_instance
-```
+## Scenarios
 
-## Run
+### Customer creation
 
-```bash
-GOOGLE_APPLICATION_CREDENTIALS="/home/ubuntu/wallet-web-codelab/api/lvmh-project-411911-3fa1b9e130a9.json" node ./app.js
-```
+- The customer arrives at the store.
+- The customer is asked to present his passport (not required).
+- The seller scans the passport.
+- The customer is asked to enter his email address (not required).
+- The customer is asked to enter his phone number (not required).
+- The seller creates the customer's account.
+- The seller generates a QRcode for the customer's card.
+- The customer scans the QRcode to add the card to his Wallet.
+
+### Customer identification
+
+- The customer arrives at the store.
+- The customer presents his Wallet.
+- The seller scans the QRcode.
+- The customer is identified.
+
+## Setup
+
+- API: Please refer to the [API README](api/README.md) for more information.
+- Client: Please refer to the [Client README](client/README.md) for more information.
+- Mobile App: Please refer to the [Mobile App README](mobile/README.md) for more information.
